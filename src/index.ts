@@ -20,28 +20,40 @@ client.on('ready', () => {
 });
 
 client.on('message', async (message) => {
+  // get contact info
   const contact = await message.getContact();
+
+  // get message body
   const messageBody = message.body;
-  const lowerCasedMessageBody = messageBody.toLowerCase();
-  const acceptedSalam = ['Assalamualaikum', "Assalamu'alaikum"];
+  const lowerCasedMessageBody = messageBody
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9]/g, '');
+
+  // accepted keywords
+  const acceptedSalam = ['assalamualaikum'];
+  const acceptedNonSalam = ['pik, fik'];
+
+  // get current timestamp
   const timeStamp = new Date().toLocaleString('id-ID');
 
+  // print log
   console.log(
-    `[${timeStamp}] ${contact.name} (${contact.id.user}) berkata: ${message.body}`
+    `[${timeStamp}] ${contact.name} (${contact.id.user}) berkata: ${messageBody}`
   );
 
   // if someone give me salam
   acceptedSalam.forEach((salam) => {
-    if (lowerCasedMessageBody.startsWith(salam.toLowerCase())) {
+    if (lowerCasedMessageBody.startsWith(salam)) {
       message.reply("Wa'alaikumussalam");
-      return;
     }
   });
 
   // if someone called me "pik"
-  if (lowerCasedMessageBody.startsWith('pik')) {
-    message.reply('Euy');
-  }
+  acceptedNonSalam.forEach((salam) => {
+    if (lowerCasedMessageBody.startsWith(salam)) {
+      message.reply('Euy');
+    }
+  });
 });
 
 client.initialize();
