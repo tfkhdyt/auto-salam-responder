@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "pnpm build && node ./dist/index.js",
     "dev": "tsnd --respawn --clear ./src/index.ts",
     "build": "tsc"
   },
