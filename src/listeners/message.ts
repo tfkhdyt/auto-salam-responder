@@ -3,6 +3,8 @@ import WAWebJS from 'whatsapp-web.js';
 import printLog from '../utils/logger';
 
 const messageListener = async (message: WAWebJS.Message) => {
+  if (message.isStatus) return;
+
   // get contact info
   const contact = await message.getContact();
 
