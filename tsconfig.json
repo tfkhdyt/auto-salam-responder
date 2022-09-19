@@ -102,6 +102,7 @@
     "baseUrl": "./src",
     "paths": {
       "@/configs/*": ["configs/*"],
+      "@/handlers/*": ["handlers/*"],
       "@/listeners/*": ["listeners/*"],
       "@/utils/*": ["utils/*"]
     }

@@ -28,6 +28,7 @@
   },
   "_moduleAliases": {
     "@/configs": "dist/configs",
+    "@/handlers": "dist/handlers",
     "@/listeners": "dist/listeners",
     "@/utils": "dist/utils"
   }
