@@ -1,39 +1,27 @@
 import WAWebJS from 'whatsapp-web.js';
 
-import printLog from '@/utils/logger';
+import pikHandler from '@/handlers/pik';
+import salamHandler from '@/handlers/salam';
+import thanksHandler from '@/handlers/thanks';
 
 const messageListener = async (message: WAWebJS.Message) => {
+  // stop the listener if message is from a status or from a group
   if (message.isStatus || message.author) return;
 
   // get contact info
   const contact = await message.getContact();
 
   // get message body
-  const messageBody = message.body;
-  const lowerCasedMessageBody = messageBody
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9]/g, '');
-
-  // accepted keywords
-  const acceptedSalam = ['assalamualaikum'];
-  const acceptedNonSalam = ['pik', 'fik'];
+  const { body: messageBody } = message;
 
   // if someone give me salam
-  acceptedSalam.forEach((salam) => {
-    if (lowerCasedMessageBody.startsWith(salam)) {
-      message.reply("Wa'alaikumussalam");
-      printLog(contact, messageBody);
-      return;
-    }
-  });
+  salamHandler(messageBody, message, contact);
 
   // if someone called me "pik"
-  acceptedNonSalam.forEach((salam) => {
-    if (lowerCasedMessageBody.startsWith(salam)) {
-      message.reply('Euy');
-      return printLog(contact, messageBody);
-    }
-  });
+  pikHandler(messageBody, message, contact);
+
+  // if someone say "thanks"
+  thanksHandler(messageBody, message, contact);
 };
 
 export default messageListener;
