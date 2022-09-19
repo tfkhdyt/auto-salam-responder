@@ -3,7 +3,7 @@ import WAWebJS from 'whatsapp-web.js';
 import printLog from '@/utils/logger';
 
 const messageListener = async (message: WAWebJS.Message) => {
-  if (message.isStatus) return;
+  if (message.isStatus || message.author) return;
 
   // get contact info
   const contact = await message.getContact();
@@ -16,13 +16,14 @@ const messageListener = async (message: WAWebJS.Message) => {
 
   // accepted keywords
   const acceptedSalam = ['assalamualaikum'];
-  const acceptedNonSalam = ['pik, fik'];
+  const acceptedNonSalam = ['pik', 'fik'];
 
   // if someone give me salam
   acceptedSalam.forEach((salam) => {
     if (lowerCasedMessageBody.startsWith(salam)) {
       message.reply("Wa'alaikumussalam");
       printLog(contact, messageBody);
+      return;
     }
   });
 
@@ -30,7 +31,7 @@ const messageListener = async (message: WAWebJS.Message) => {
   acceptedNonSalam.forEach((salam) => {
     if (lowerCasedMessageBody.startsWith(salam)) {
       message.reply('Euy');
-      printLog(contact, messageBody);
+      return printLog(contact, messageBody);
     }
   });
 };
