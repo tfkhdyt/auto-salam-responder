@@ -1,22 +1,17 @@
 import { Contact, Message } from 'whatsapp-web.js';
 
+import checkPikMessage from '@/utils/checkPikMessage';
 import printLog from '@/utils/logger';
+import removeSpecialChars from '@/utils/removeSpecialChars';
 
 const pikHandler = (
   messageBody: string,
   message: Message,
   contact: Contact
 ) => {
-  const acceptedNonSalam = ['pik', 'fik', 'tupik', 'tufik'];
-  const lowerCasedMessageBody = messageBody
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9]/g, '');
+  const isMatch = checkPikMessage(messageBody);
 
-  const isMatch = acceptedNonSalam.some((word) =>
-    lowerCasedMessageBody.startsWith(word)
-  );
-
-  if (isMatch && lowerCasedMessageBody.length <= 5) {
+  if (isMatch && removeSpecialChars(messageBody).length <= 5) {
     message.reply('Euy');
     return printLog(contact, messageBody);
   }
