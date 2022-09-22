@@ -2,7 +2,6 @@ import { Contact, Message } from 'whatsapp-web.js';
 
 import checkPikMessage from '@/utils/checkPikMessage';
 import printLog from '@/utils/logger';
-import removeSpecialChars from '@/utils/removeSpecialChars';
 
 const pikHandler = (
   messageBody: string,
@@ -11,7 +10,7 @@ const pikHandler = (
 ) => {
   const isMatch = checkPikMessage(messageBody);
 
-  if (isMatch && removeSpecialChars(messageBody).length <= 5) {
+  if (isMatch && messageBody.toLowerCase().length <= 5) {
     message.reply('Euy');
     return printLog(contact, messageBody);
   }
