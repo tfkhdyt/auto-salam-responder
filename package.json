@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production npm run build && node ./dist/index.js",
+    "start": "NODE_ENV=production node ./dist/index.js",
     "dev": "nodemon src/index.ts",
+    "prebuild": "rm -rf ./dist/* && vitest run",
     "build": "tsc",
+    "postbuild": "npm run lint",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint --fix {src/**/*.ts,tests/**/*.ts}"
