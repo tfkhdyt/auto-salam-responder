@@ -1,7 +1,7 @@
 import { Contact, Message } from 'whatsapp-web.js';
 
-import printLog from '@/utils/logger';
 import checkThanksMessage from '@/utils/checkThanksMessage';
+import printLog from '@/utils/logger';
 
 const thanksHandler = (
   messageBody: string,

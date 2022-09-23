@@ -1,10 +1,11 @@
 import 'module-alias/register';
+
 import { Client, LocalAuth } from 'whatsapp-web.js';
 
 import puppeteerOptions from './configs/puppeteer';
 import messageListener from './listeners/message';
-import readyListener from './listeners/ready';
 import qrListener from './listeners/qr';
+import readyListener from './listeners/ready';
 
 const client = new Client({
   authStrategy: new LocalAuth(),

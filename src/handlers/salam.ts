@@ -1,7 +1,7 @@
-import { Message, Contact } from 'whatsapp-web.js';
+import { Contact,Message } from 'whatsapp-web.js';
 
-import printLog from '@/utils/logger';
 import checkSalamMessage from '@/utils/checkSalamMessage';
+import printLog from '@/utils/logger';
 
 const salamHandler = (
   messageBody: string,
