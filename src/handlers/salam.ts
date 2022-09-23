@@ -1,24 +1,18 @@
 import { Message, Contact } from 'whatsapp-web.js';
 
 import printLog from '@/utils/logger';
+import checkSalamMessage from '@/utils/checkSalamMessage';
 
 const salamHandler = (
   messageBody: string,
   message: Message,
   contact: Contact
 ) => {
-  const lowerCasedMessageBody = messageBody
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9]/g, '');
-  const acceptedSalam = ['assalamualaikum'];
-
-  const isMatch = acceptedSalam.some((salam) =>
-    lowerCasedMessageBody.startsWith(salam)
-  );
+  const isMatch = checkSalamMessage(messageBody);
 
   if (isMatch) {
     message.reply("Wa'alaikumussalam");
-    return printLog(contact, messageBody);
+    printLog(contact, messageBody);
   }
 };
 
