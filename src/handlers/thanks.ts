@@ -9,8 +9,11 @@ const thanksHandler = (
   contact: Contact
 ) => {
   const response = checkThanksMessage(messageBody);
-  message.reply(response);
-  printLog(contact, messageBody);
+
+  if (response) {
+    message.reply(response);
+    printLog(contact, messageBody);
+  }
 };
 
 export default thanksHandler;
