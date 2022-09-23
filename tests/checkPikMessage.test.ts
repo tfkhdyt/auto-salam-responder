@@ -3,28 +3,31 @@ import { describe, expect, it } from 'vitest';
 import checkPikMessage from '../src/utils/checkPikMessage';
 
 describe('check pik message', () => {
-  it('should match with pik', () => {
-    expect(checkPikMessage('pik')).to.be.true;
+  it('should returns true', () => {
+    expect(checkPikMessage('pik')).toEqual(true);
+    expect(checkPikMessage('fik')).toEqual(true);
+    expect(checkPikMessage('tupik')).toEqual(true);
+    expect(checkPikMessage('tufik')).toEqual(true);
   });
-  it('should match with fik', () => {
-    expect(checkPikMessage('fik')).to.be.true;
+
+  it('should returns true (Uppercase)', () => {
+    expect(checkPikMessage('Pik')).toEqual(true);
+    expect(checkPikMessage('Fik')).toEqual(true);
+    expect(checkPikMessage('Tupik')).toEqual(true);
+    expect(checkPikMessage('Tufik')).toEqual(true);
   });
-  it('should match with tupik', () => {
-    expect(checkPikMessage('tupik')).to.be.true;
+
+  it('should returns false', () => {
+    expect(checkPikMessage('pik apa kabar?')).toEqual(false);
+    expect(checkPikMessage('fik sehat?')).toEqual(false);
+    expect(checkPikMessage('tupik keur naon?')).toEqual(false);
+    expect(checkPikMessage('tufik, wooooooooooooyyy')).toEqual(false);
   });
-  it('should match with tufik', () => {
-    expect(checkPikMessage('tufik')).to.be.true;
-  });
-  it('should match with Pik', () => {
-    expect(checkPikMessage('Pik')).to.be.true;
-  });
-  it('should match with Fik', () => {
-    expect(checkPikMessage('Fik')).to.be.true;
-  });
-  it('should match with Tupik', () => {
-    expect(checkPikMessage('Tupik')).to.be.true;
-  });
-  it('should match with Tufik', () => {
-    expect(checkPikMessage('Tufik')).to.be.true;
+
+  it('should returns false (Uppercase)', () => {
+    expect(checkPikMessage('Pik apa kabar?')).toEqual(false);
+    expect(checkPikMessage('Fik sehat?')).toEqual(false);
+    expect(checkPikMessage('Tupik keur naon?')).toEqual(false);
+    expect(checkPikMessage('Tufik, wooooooooooooyyy')).toEqual(false);
   });
 });
