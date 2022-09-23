@@ -10,7 +10,7 @@ const pikHandler = (
 ) => {
   const isMatch = checkPikMessage(messageBody);
 
-  if (isMatch && messageBody.toLowerCase().length <= 5) {
+  if (isMatch) {
     message.reply('Euy');
     return printLog(contact, messageBody);
   }
